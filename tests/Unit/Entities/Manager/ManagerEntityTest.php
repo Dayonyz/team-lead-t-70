@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Entities\HR;
+namespace Tests\Unit\Entities\Manager;
 
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
