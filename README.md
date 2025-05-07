@@ -1,6 +1,6 @@
 # Team Lead T-70 Application
 
-## Laravel Deploy
+## Deploy Docker
 
 ```
 make build
