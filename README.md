@@ -7,50 +7,57 @@ make build
 make install
 ```
 
+## Run tests before
+
+```
+make ssh
+vendor/bin/phpunit --testsuite "Unit Tests"
+```
+
 ## Run Application
 
 ```
 make restart
 make ssh
-php artisan app:test-team-lead-app
+php app.php
 
 Welcome and have a fun :)
 ```
 Code base folder
 ```
-/app/Domain
+/src
 ```
 Technical requirements
 ```
-Тимлид - терминатор Т-70
-Реализовать алгоритм автоматического воспитания джуна
-Тимлид Т-70 может находится в одном из 4х состояний, начальное состояние может быть любым:
-• Хорошем настроении
-• Нормальном Настроении
-• Плохом
-• Состояние «не попадись на глаза»
-В зависимости от работы юного программиста (сигналы 1 || 0), Т-70 переходит в другое состояние:
+Teamlead - Terminator T-70
+Implement the algorithm for automatic education of a junior developer
 
+Teamlead T-70 can be in one of 4 states, the initial state can be any:
+• Good mood
+• Normal mood
+• Bad mood
+• State «don't catch my eye»
 
-Изначальное состояние
-                       Делает успешно работу - 1    Косячит - 0
-Хорошем настроении     Хорошем настроении           Нормальном Настроении
-Нормальном Настроении  Хорошем настроении           Плохом
-Плохом                 Нормальном Настроении        Состояние «не попадись на глаза»
-Состояние «не п...»    Плохом                       Состояние «не попадись на глаза»
+Depending on the work of the junior developer (signals 1 || 0), T-70 goes into another state:
 
-При переходе между состояниями Т-70 генерирует соответствующую фразу(придумать самостоятельно
+Initial state
+                             Does the job successfully - 1    Does a bad job - 0
+Good mood                    Good mood                        Normal mood
+Normal mood                  Good mood                        Bad mood
+Bad mood                     Normal mood                      State «don't catch my eye»
+State «don't catch my eye»   Bad mood                         State «don't catch my eye»
 
-Есть у нас HR T-1000 она хочет знать сколько раз Т-70 был вынесен выговор программисту
-(возникает когда Т70 в состоянии «не попадись на глаза» получает сигнал 0).
+When transitioning between states, the T-70 generates a corresponding phrase (think up your own)
 
-Есть еще Менеджер Т-1001 она хочет знать сколько раз программиста хвалил Т-70
-(Т-70 в состоянии «Хорошего настроения» получает сигнал 1).
+We have HR T-1000, she wants to know how many times T-70 has reprimanded the programmer
+(occurs when T70 in the "don't catch my eye" state receives a 0 signal).
 
-Требования:
-1. Чистый РНР (без использования фреймворков)
-2. система должна быть масштабируема, т.е при добавлении нового состояния
-Т-70 нам не нужно производить рефакторинг всей системы,
-3. Мы должны иметь возможность легко менять поведение системы. Например: попадать из состояния «Хорошем настроении» в «Плохое», при плохой работе программиста (сигнал 0) .
-4. Мы легко можем добавить любое количество дополнительных сущностей, которые будут следить за изменениями состояния Т-70.
+There is also Manager T-1001, she wants to know how many times the programmer was praised by T-70
+(T-70 in the "Good mood" state receives signal 1).
+
+Requirements:
+1. Pure PHP (no frameworks)
+2. The system should be scalable, i.e. when adding a new T-70 state, we don't need to refactor the entire system,
+3. We should be able to easily change the system's behavior. For example: go from the "Good mood" state to "Bad" when the programmer is doing a bad job (signal 0).
+4. We can easily add any number of additional entities that will monitor changes in the T-70 state.
 ```
