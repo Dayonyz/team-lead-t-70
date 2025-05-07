@@ -24,7 +24,7 @@ class EventBusTest extends TestCase
     {
         $bus = new EventBus();
 
-        $uuid = Uuid::uuid4();
+        $uuid = Uuid::uuid1();
         $publisher = new DummyPublisher($uuid);
         $subscriber = new DummySubscriber();
 
@@ -50,7 +50,7 @@ class EventBusTest extends TestCase
     {
         $bus = new EventBus();
 
-        $uuid = Uuid::uuid4();
+        $uuid = Uuid::uuid1();
         $publisher = new DummyPublisher($uuid);
         $subscriber = new DummySubscriber();
 
@@ -76,7 +76,7 @@ class EventBusTest extends TestCase
         $this->expectExceptionMessage('Event handler must have 2 params: EntityEventSubscriber and EntityEvent');
 
         $bus = new EventBus();
-        $uuid = Uuid::uuid4();
+        $uuid = Uuid::uuid1();
         $publisher = new DummyPublisher($uuid);
         $subscriber = new DummySubscriber();
 
@@ -94,7 +94,7 @@ class EventBusTest extends TestCase
         $this->expectExceptionMessage("Expected first param of event handler");
 
         $bus = new EventBus();
-        $uuid = Uuid::uuid4();
+        $uuid = Uuid::uuid1();
         $publisher = new DummyPublisher($uuid);
         $subscriber = new DummySubscriber();
 
@@ -112,7 +112,7 @@ class EventBusTest extends TestCase
         $this->expectExceptionMessage("Expected second param of event handler");
 
         $bus = new EventBus();
-        $uuid = Uuid::uuid4();
+        $uuid = Uuid::uuid1();
         $publisher = new DummyPublisher($uuid);
         $subscriber = new DummySubscriber();
 
@@ -128,7 +128,7 @@ class EventBusTest extends TestCase
     {
         $bus = new EventBus();
 
-        $uuid = Uuid::uuid4();
+        $uuid = Uuid::uuid1();
         $publisher = new DummyPublisher($uuid);
         $subscriber = new DummySubscriber();
 

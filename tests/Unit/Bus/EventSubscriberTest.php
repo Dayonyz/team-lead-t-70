@@ -15,7 +15,7 @@ class EventSubscriberTest extends TestCase
     public function testGetUuid(): void
     {
         $eventSubscriber = $this->createMock(EventSubscriber::class);
-        $uuid = Guid::uuid4();
+        $uuid = Guid::uuid1();
         $eventSubscriber->method('getUuid')->willReturn($uuid);
 
         $this->assertEquals($uuid, $eventSubscriber->getUuid());
