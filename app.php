@@ -17,9 +17,9 @@ $eventBus = new EventBus();
 
 try {
     $eventBus->subscribe($hr, $teamLead, function (HrEntity $hr, WorkCheckedEvent $event) {
-        if ($event->getPreviousMood()->value === MoodStateEnum::ANGRY_MOOD->value &&
-            $event->getWorkState()->value === WorkStateEnum::FAILED->value &&
-            $event->getCurrentMood()->value === MoodStateEnum::ANGRY_MOOD->value
+        if ($event->getPreviousMood() === MoodStateEnum::ANGRY_MOOD &&
+            $event->getWorkState() === WorkStateEnum::FAILED &&
+            $event->getCurrentMood() === MoodStateEnum::ANGRY_MOOD
         ) {
             $hr->incrementReprimandCount();
         }
@@ -30,9 +30,9 @@ try {
 
 try {
     $eventBus->subscribe($manager, $teamLead, function (ManagerEntity $manager, WorkCheckedEvent $event) {
-        if ($event->getPreviousMood()->value === MoodStateEnum::GOOD_MOOD->value &&
-            $event->getWorkState()->value === WorkStateEnum::SUCCESS->value &&
-            $event->getCurrentMood()->value === MoodStateEnum::GOOD_MOOD->value
+        if ($event->getPreviousMood() === MoodStateEnum::GOOD_MOOD &&
+            $event->getWorkState() === WorkStateEnum::SUCCESS &&
+            $event->getCurrentMood() === MoodStateEnum::GOOD_MOOD
         ) {
             $manager->incrementPraiseCount();
         }
