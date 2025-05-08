@@ -14,7 +14,7 @@ class TeamLeadEntityTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testCheckWork(): void
+    public function testCheckWorkAndPrintReport(): void
     {
         $printerMock = $this->createMock(ReportPrinterInterface::class);
 
