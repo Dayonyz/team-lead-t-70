@@ -24,7 +24,7 @@ class MoodConverterTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $converter = new MoodConverter([1, 2]);
+        $converter = new MoodConverter([]);
         $converter->convert(MoodStateEnum::ANGRY_MOOD, WorkStateEnum::FAILED);
     }
 }

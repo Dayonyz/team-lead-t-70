@@ -13,7 +13,7 @@ class MoodConverter
 
     public function __construct(?array $matrix = null)
     {
-        if (!$matrix) {
+        if (is_null($matrix)) {
             $this->matrix[MoodStateEnum::GOOD_MOOD->value] = [
                 WorkStateEnum::SUCCESS->value => new WorkResponse(
                     MoodStateEnum::GOOD_MOOD,
