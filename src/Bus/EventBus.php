@@ -14,9 +14,9 @@ class EventBus
         $key = $this->publisherKey($publisher);
 
         if (isset($this->publishers[$key])) {
-            foreach ($this->publishers[$key] ?? [] as $subscriberPool) {
+            foreach ($this->publishers[$key] as $subscriberPool) {
                 if ($subscriberPool['event_class'] === $event::class) {
-                    $subscriberPool['handler']($subscriberPool['subscriber'], $event);
+                    ($subscriberPool['handler'])($subscriberPool['subscriber'], $event);
                 }
             }
         }
@@ -57,18 +57,39 @@ class EventBus
             );
         }
 
-        $key = $this->publisherKey($publisher);
+        $publisherKey = $this->publisherKey($publisher);
+        $subscriberKey = $this->subscriberKey($subscriber);
 
-        if (!isset($this->publishers[$key])) {
-            $this->publishers[$key] = [];
+        if (!isset($this->publishers[$publisherKey])) {
+            $this->publishers[$publisherKey] = [];
             $publisher->registerObserver($this);
         }
 
-        $this->publishers[$key][$this->subscriberKey($subscriber)] = [
+        if (isset($this->publishers[$publisherKey][$subscriberKey])) {
+            $existing = $this->publishers[$publisherKey][$subscriberKey];
+
+            if ($existing['event_class'] === $eventType && $this->isSameHandler($existing['handler'], $handler)) {
+                return;
+            }
+
+            throw new InvalidArgumentException(sprintf(
+                "Subscriber '%s' already subscribed to event '%s' from publisher '%s' with a different handler",
+                $subscriberKey,
+                $eventType,
+                $publisherKey
+            ));
+        }
+
+        $this->publishers[$publisherKey][$subscriberKey] = [
             'subscriber'  => $subscriber,
             'event_class' => $eventType,
             'handler'     => $handler
         ];
+    }
+
+    protected function isSameHandler(callable $a, callable $b): bool
+    {
+        return $a === $b;
     }
 
     protected function publisherKey(EventPublisherInterface $publisher): string
