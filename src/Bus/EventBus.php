@@ -64,7 +64,7 @@ class EventBus
             $publisher->registerObserver($this);
         }
 
-        $this->publishers[$key][] = [
+        $this->publishers[$key][$this->subscriberKey($subscriber)] = [
             'subscriber'  => $subscriber,
             'event_class' => $eventType,
             'handler'     => $handler
@@ -74,5 +74,10 @@ class EventBus
     protected function publisherKey(EventPublisherInterface $publisher): string
     {
         return $publisher::class . ':' . $publisher->getUuid()->toString();
+    }
+
+    protected function subscriberKey(EventSubscriberInterface $subscriber): string
+    {
+        return $subscriber::class . ':' . $subscriber->getUuid()->toString();
     }
 }
